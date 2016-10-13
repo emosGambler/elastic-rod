@@ -12,8 +12,8 @@ package chartadvancedscatter;
 public class ElasticRodChart extends ElasticRod {
 
     double dForce = 0.01;
-    double yPrecision = 0.05;
-    double tetaPrecision = 0.5;
+    double yPrecision = 0.01;
+    double tetaPrecision = 0.1;
     int changedDirectionIndex = 0;//TODO: enum, set value for boundary values
     boolean rodPointingUp = true;
     double vDivider = 1000.0;
@@ -83,6 +83,7 @@ public class ElasticRodChart extends ElasticRod {
     private void calculateForce() {
         if (isRodStraight()) {
             force = 0.0;
+            calculateRodCoordinates();
         } else {
             force += dForce;
             calculateRodCoordinates();
