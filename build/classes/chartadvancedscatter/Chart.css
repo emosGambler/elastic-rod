@@ -1,6 +1,0 @@
-.chart-symbol{ 
-    -fx-stroke: #00e203;
-    -fx-shape: "M 100 100 a 50 50 0 1 0 0.00001 0";
-    -fx-background-color: red;
-    -fx-padding: 1px;
-}
