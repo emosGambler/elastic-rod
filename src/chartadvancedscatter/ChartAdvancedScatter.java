@@ -29,18 +29,20 @@ public class ChartAdvancedScatter extends Application {
     private ScatterChart<Number, Number> createChart(ElasticRodChart chart) {
         ScatterChart<Number, Number> scatterChart = new ScatterChart<Number, Number>(getXAxis(), getYAxis());
         scatterChart.getData().add(getSeries(chart));
+        scatterChart.setMinSize(500, 500);
+        scatterChart.setMaxSize(500, 500);
         return scatterChart;
     }
 
     private NumberAxis getXAxis() {
-        final NumberAxis x = new NumberAxis();
+        final NumberAxis x = new NumberAxis(-1, 1, 0.1);
         x.setSide(Side.BOTTOM);
         x.setLabel(X_AXIS_TITLE);
         return x;
     }
 
     private NumberAxis getYAxis() {
-        final NumberAxis y = new NumberAxis();
+        final NumberAxis y = new NumberAxis(-1, 1, 0.1);
         y.setSide(Side.RIGHT);
         y.setLabel(Y_AXIS_TITLE);
         return y;
@@ -64,12 +66,15 @@ public class ChartAdvancedScatter extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ElasticRodChart chart = new ElasticRodChart(1.0, 0.55);
+        //grid
         final GridPane grid = new GridPane();
         grid.setAlignment(Pos.TOP_LEFT);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        primaryStage.setScene(new Scene(grid, 650, 650));
+        Scene scene = new Scene(grid, 650, 650);
+        scene.getStylesheets().add("chartadvancedscatter/Chart.css");
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Elastic Rod - Jacek Góraj");
         grid.add(createChart(chart), 0, 0);
         VBox hbox = new VBox();
@@ -77,7 +82,6 @@ public class ChartAdvancedScatter extends Application {
         hbox.setSpacing(10);
         hbox.setStyle("-fx-background-color: #F0BC63;");
         grid.add(hbox, 1, 0);
-
         Button btn = new Button();
         btn.setText("Simulate");
         Label tetaLabel = new Label("Teta[0]:");
